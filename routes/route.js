@@ -1,9 +1,10 @@
 const fs = require('fs')
 const { Middleware } = require('../core/middleware')
+const auth = require('../controllers/authentication').Authentication
 
 const route = (app,recaptcha,md) => {
-    app.get('/login',(req,res) => {
-        res.send("hello world")
+    app.get('/api/login',(req,res) => {
+        auth.login(req,res)
     })
 }
 
