@@ -8,10 +8,29 @@ class UsersModel extends Database {
    {
           
    }
-
+   
    async insertUser(data)
    {
-       
+       data = await this.Insert().Into('users')
+         .Columns(data)
+         .SetAsync().catch((err) => {
+            console.log(err);
+            
+         })
+      return data
+   }
+
+   async getUser(args = { select:[],where:{ column:'',value:'' } })
+   {
+      let data = await this.Select(args.select)
+         .From('users')
+         .Where(args.where)
+         .GetAsync().catch((err) => {
+            console.log(err);
+            
+         })
+
+      return data
    }
     
 }

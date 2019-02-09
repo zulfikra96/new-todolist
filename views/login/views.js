@@ -32,7 +32,17 @@ const login = {
     controller:function()
     {
         new Vue({
-            el:'#App'
+            el:'#App',
+            data:{
+                username:'',
+                password:''
+            },
+            methods: {
+                postLogin()
+                {
+
+                }
+            },
         })
         return this
     }

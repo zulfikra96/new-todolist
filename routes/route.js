@@ -6,6 +6,10 @@ const route = (app,recaptcha,md) => {
     app.get('/api/login',(req,res) => {
         auth.login(req,res)
     })
+
+    app.post("/api/register",(req,res) => {
+        auth.register(req,res)
+    })
 }
 
 
