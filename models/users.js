@@ -27,9 +27,19 @@ class UsersModel extends Database {
          .Where(args.where)
          .GetAsync().catch((err) => {
             console.log(err);
-            
          })
 
+      return data
+   }
+
+   async updateUser(args = { column:'',where:''})
+   {
+      let data = await this.Update('users')
+         .SetColumnAll(args.column)
+         .WhereAll(args.where)
+         .SetAsync().catch((err) => {
+            console.log(err);
+         })
       return data
    }
     

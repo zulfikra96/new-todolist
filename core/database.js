@@ -29,6 +29,9 @@ class Database {
     * pada table
     * 
     */
+
+
+
     Select(args = [])
     {
         this.field = `SELECT ${args} `
@@ -46,6 +49,13 @@ class Database {
     Where(args = {column:'',value:''})
     {
         this.field += ` WHERE ${args.column} = ${args.value}`
+
+        return this
+    }
+
+    WhereAll(args)
+    {
+        this.field += `  ${args} `
 
         return this
     }
@@ -179,6 +189,13 @@ class Database {
         return this
     }
 
+    SetColumnAll(args)
+    {
+        this.field += ` ${args} `
+
+        return this
+    }
+
     AndSetColumn(args = {column:'',value:0})
     {
         this.field += `, ${args.column} = ${args.value} `
@@ -236,7 +253,7 @@ class Database {
        let db = new Promise(function(res,rej){
             DB.query(_this.field,function(err,result){
                 if(err){
-                    console.log(err);
+                    console.error(err);
                     
                     return rej(err)
                 }
