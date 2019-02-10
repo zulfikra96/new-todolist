@@ -404,7 +404,23 @@ function logAktifitasUsers(aktifitas)
     socket.emit(`/aktivitas/pengguna`,data)
 }
 
+function http(args = { method:'', url:'' })
+{
+    let xhttp = new XMLHttpRequest()
+
+    let promise = new Promise((resolve,reject) => {
+        xhttp.onreadystatechange()
+        {
+            return resolve(xhttp)
+        }
+    })
+
+    xhttp.open(args.method, args.url,true)
+    xhttp.send()
+}
 
 
-
-
+function http2(args = {url:''})
+{
+    
+}

@@ -15,6 +15,11 @@ router.add('/login', function () {
         .controller()
 });
 
+router.add('/home', function () {
+    home.main()
+        .controller()
+});
+
 
 router.addUriListener();
 router.check()
