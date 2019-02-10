@@ -76,9 +76,8 @@ class Middleware extends Cryptr {
             role = [`${role}`]
         }
         
-        database.Select(['nama_lengkap','token','users.user_id','nomor_induk','users.email','no_telp','roles'])
+        database.Select(['username','roles'])
                 .From('users')
-                .LeftJoin('biodata').On({table:'users',column:'user_id',value:'biodata.user_id'})
                 .Where({column:'token',value:`'${_token}'`})
                 .Get(function(err,result){
                     if(err) console.log(err);

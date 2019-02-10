@@ -15,7 +15,7 @@ class Authentication extends Controller{
     {
         let data = req.body
         let _this = this
-        let users = await this.users.getUser({select:['username','password','token'],where:{column:'username',value:`'${data["username"]}'`}})
+        let users = await this.users.getUser({select:['username','roles','password'],where:{column:'username',value:`'${data["username"]}'`}})
             .catch((err) => {
                 return _this.error(res,"maaf ada sesuatu yang salah")
                 console.log(err);  
@@ -31,7 +31,8 @@ class Authentication extends Controller{
             return this.error(res,"maaf password anda salah")
         } 
         delete data["password"]
-        console.log(data["username"]);
+        delete users["password"]
+        console.log(users);
         
         let token = md.createToken(users)
         let update = await this.users.updateUser({column:`token = '${token}'`,where:`WHERE username = '${data["username"]}'`})

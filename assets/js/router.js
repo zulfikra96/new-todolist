@@ -16,8 +16,10 @@ router.add('/login', function () {
 });
 
 router.add('/home', function () {
-    home.main()
+    verifyToken(router,() =>{
+        home.main()
         .controller()
+    },['pengguna'])
 });
 
 

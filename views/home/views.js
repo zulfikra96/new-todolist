@@ -11,24 +11,24 @@ const home = {
                 </div>
                 <div class="modal-body">
                     <div class="content">
-                        <form action="">
-                            <div class="form-group">
+                        <form action="" v-on:submit.prevent="postTodo()">
+                            <div class="form-group" >
                                 <label for="">Judul</label>
-                                <input type="text" class="form-input">
+                                <input type="text" class="form-input" v-model="todo.title">
                             </div>
                             <div class="form-group">
                                 <label for="">Deskripsi</label>
-                                <textarea name="" id="" cols="30" rows="10" class="form-input"></textarea>
+                                <textarea name="" id="" cols="30" rows="10" v-model="todo.description" class="form-input"></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="columns">
                                     <div class="column col-6">
                                         <label for="">Tanggal Mulai</label>
-                                        <input type="datetime-local" class="form-input">
+                                        <input type="date" class="form-input" v-model="todo.date_start">
                                     </div>
                                     <div class="column col-6">
                                         <label for="">Tanggal Selesai</label>
-                                        <input type="datetime-local" class="form-input">
+                                        <input type="date" class="form-input" v-model="todo.date_end">
                                     </div>
                                 </div>
                             </div>
@@ -69,6 +69,32 @@ const home = {
             el:'#App',
             data() {
                 return {
+                    todo:{
+                        title:'',
+                        description:'',
+                        date_start:'',
+                        date_end:''
+                    }
+                }
+            },
+            methods: {
+                async postTodo()
+                {
+                    console.log(localStorage.getItem('token'));
+                    
+                    let response = await fetch(`${static_data.domain}/create`,{
+                         method:'POST',
+                         credentials:'same-origin',
+                         headers:new Headers({
+                             'content-type':'application/json',
+                             _token:localStorage.getItem('token')
+                         }),
+                         body:JSON.stringify(this.data)
+                    })
+                    let data = await response.json()
+                    console.log(data);
+                     
+                  
                     
                 }
             },
